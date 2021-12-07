@@ -60,11 +60,11 @@ contract KYCContract is Ownable {
         bool isRemovedFromBankListFlag = false;
         
         require(_address != address(0), "No valid address!");
-        require(banks[_address]._address != address(0), "Bank not exists!");
+        require(banks[_address]._address != address(0), "This Bank doesn't exists!");
         
         Bank memory _bank = banks[_address];
         
-        require(_bank._totalCustomers == 0, "This Banks has some users registered!");
+        require(_bank._totalCustomers == 0, "This Bank has some users registered!");
         require(bankRegStore[_bank._identifier] != address(0), "This Bank Identifier Code is not exist!");
         
         delete bankRegStore[_bank._identifier];
@@ -109,7 +109,7 @@ contract KYCContract is Ownable {
         bool isUpdateFromBankListFlag = false;
         
         require(_address != address(0), "No valid address!");
-        require(banks[_address]._address != address(0), "Bank not exists!");
+        require(banks[_address]._address != address(0), "This Bank doesn't exists!");
         require(bytes(newName).length > 0, "Name of Bank is required!");
         require(bytes(newIdentifier).length > 0, "Bank Identifier Code is required!");
         
@@ -131,7 +131,7 @@ contract KYCContract is Ownable {
     
     function getBankDetails(address _address) public view returns (string memory bankName, address bankAddress, string memory bankIdentifier, uint totalCustomersRegistered) {
         require(_address != address(0), "No valid address!");
-        require(banks[_address]._address != address(0), "Bank not exists!");
+        require(banks[_address]._address != address(0), "This Bank doesn't exists!");
         
         Bank memory _bank = banks[_address];
          
@@ -169,7 +169,7 @@ contract KYCContract is Ownable {
         bool isRemovedFromCustomerListFlag = false;
         
         require(_address != address(0), "No valid address!");
-        require(customers[_address]._address != address(0), "Customer not exists!");
+        require(customers[_address]._address != address(0), "This Customer doesn't exists!");
         
         Customer memory _customer = customers[_address];
         
@@ -264,7 +264,7 @@ contract KYCContract is Ownable {
         Customer storage _customer = customers[_address];
         
         require(customerRegStore[_customer._addressICAP] != address(0), "The ICAP address is not exist!");
-        require(banks[newAddressBank]._address != address(0), "This Bank is not exist!");
+        require(banks[newAddressBank]._address != address(0), "This Bank doesn't exist!");
         
         Bank memory _bank = banks[newAddressBank];
         _customer._bank = _bank;
